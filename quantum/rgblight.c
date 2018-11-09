@@ -126,13 +126,13 @@ void convert_hsv_to_rgb(uint16_t hue, uint8_t sat, uint8_t val, uint8_t *r_p, ui
 void sethsv(uint16_t hue, uint8_t sat, uint8_t val, LED_TYPE *led1) {
   uint8_t r, g, b;
   convert_hsv_to_rgb(hue, sat, val, &r, &g, &b);
-  #ifdef RGBW
+#ifdef RGBW
   uint8_t w;
   convert_rgb_to_rgbw(&r, &g, &b, &w);
   setrgbw(r, g, b, w, led1);
-  #else
+#else
   setrgb(r, g, b, led1);
-  #endif
+#endif
 }
 
 void setrgb(uint8_t r, uint8_t g, uint8_t b, LED_TYPE *led1) {
@@ -151,16 +151,16 @@ void setrgbw(uint8_t r, uint8_t g, uint8_t b, uint8_t w, LED_TYPE *led1) {
 #endif
 
 uint32_t eeconfig_read_rgblight(void) {
-  #ifdef __AVR__
+#ifdef __AVR__
     return eeprom_read_dword(EECONFIG_RGBLIGHT);
-  #else
+#else
     return 0;
-  #endif
+#endif
 }
 void eeconfig_update_rgblight(uint32_t val) {
-  #ifdef __AVR__
+#ifdef __AVR__
     eeprom_update_dword(EECONFIG_RGBLIGHT, val);
-  #endif
+#endif
 }
 void eeconfig_update_rgblight_default(void) {
   //dprintf("eeconfig_update_rgblight_default\n");
@@ -519,33 +519,33 @@ uint8_t rgblight_get_val(void) {
 
 void rgblight_setrgb(uint8_t r, uint8_t g, uint8_t b) {
   if (!rgblight_config.enable) { return; }
-  #ifdef RGBW
+#ifdef RGBW
   uint8_t w = 0;
   convert_rgb_to_rgbw(&r, &g, &b, &w);
-  #endif
+#endif
   for (uint8_t i = 0; i < RGBLED_NUM; i++) {
     led[i].r = r;
     led[i].g = g;
     led[i].b = b;
-    #ifdef RGBW
+#ifdef RGBW
     led[i].w = w;
-    #endif
+#endif
   }
   rgblight_set();
 }
 
 void rgblight_setrgb_at(uint8_t r, uint8_t g, uint8_t b, uint8_t index) {
   if (!rgblight_config.enable || index >= RGBLED_NUM) { return; }
-  #ifdef RGBW
+#ifdef RGBW
   uint8_t w = 0;
   convert_rgb_to_rgbw(&r, &g, &b, &w);
-  #endif
+#endif
   led[index].r = r;
   led[index].g = g;
   led[index].b = b;
-  #ifdef RGBW
+#ifdef RGBW
   led[index].w = w;
-  #endif
+#endif
 
   rgblight_set();
 }
@@ -561,25 +561,25 @@ void rgblight_sethsv_at(uint16_t hue, uint8_t sat, uint8_t val, uint8_t index) {
 #ifndef RGBLIGHT_CUSTOM_DRIVER
 void rgblight_set(void) {
   if (rgblight_config.enable) {
-    #ifdef RGBW
+#ifdef RGBW
       ws2812_setleds_rgbw(led, RGBLED_NUM);
-    #else
+#else
       ws2812_setleds(led, RGBLED_NUM);
-    #endif
+#endif
   } else {
     for (uint8_t i = 0; i < RGBLED_NUM; i++) {
       led[i].r = 0;
       led[i].g = 0;
       led[i].b = 0;
-      #ifdef RGBW
+#ifdef RGBW
       led[i].w = 0;
-      #endif
+#endif
     }
-    #ifdef RGBW
+#ifdef RGBW
       ws2812_setleds_rgbw(led, RGBLED_NUM);
-    #else
+#else
       ws2812_setleds(led, RGBLED_NUM);
-    #endif
+#endif
   }
 }
 #endif
@@ -777,9 +777,9 @@ void rgblight_effect_snake(uint8_t interval) {
     led[i].r = 0;
     led[i].g = 0;
     led[i].b = 0;
-    #ifdef RGBW
+#ifdef RGBW
     led[i].w = 0;
-    #endif
+#endif
     for (j = 0; j < RGBLIGHT_EFFECT_SNAKE_LENGTH; j++) {
       k = pos + j * increment;
       if (k < 0) {
@@ -824,9 +824,9 @@ void rgblight_effect_knight(uint8_t interval) {
     led[i].r = 0;
     led[i].g = 0;
     led[i].b = 0;
-    #ifdef RGBW
+#ifdef RGBW
     led[i].w = 0;
-    #endif
+#endif
   }
   // Determine which LEDs should be lit up
   for (i = 0; i < RGBLIGHT_EFFECT_KNIGHT_LED_NUM; i++) {
@@ -838,9 +838,9 @@ void rgblight_effect_knight(uint8_t interval) {
       led[cur].r = 0;
       led[cur].g = 0;
       led[cur].b = 0;
-      #ifdef RGBW
+#ifdef RGBW
       led[cur].w = 0;
-      #endif
+#endif
     }
   }
   rgblight_set();
