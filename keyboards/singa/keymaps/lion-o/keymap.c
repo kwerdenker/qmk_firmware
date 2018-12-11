@@ -85,7 +85,7 @@ uint32_t layer_state_set_user(uint32_t state) {
   rgblight_config_t eeprom;
   switch (biton32(state)) {
     case _FN:
-      rgblight_setrgb_white();
+      rgblight_setrgb(0xFF, 0x33, 0x00);
       rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
       break;
     default:
