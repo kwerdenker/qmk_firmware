@@ -5,6 +5,23 @@
 
 #define TAPPING_TERM 100 //time in microseconds a key is counted as tapped
 
+#define KEYMAP_MX1800_ISO( \
+    K5A,      K5B, K5C, K5D, K5E, K5F, K5G, K5H, K5I, K5J, K5K, K5L, K5M,      K4P, K3O, K3P, K5N,\
+                                                                               K1P, K2O, K2P, K5O,\
+    K4A, K4B, K4C, K4D, K4E, K4F, K4G, K4H, K4I, K4J, K4K, K4L, K4M, K4N, K4O, K4Q, K4R, K4S, K5P,\
+    K3A, K3B, K3C, K3D, K3E, K3F, K3G, K3H, K3I, K3J, K3K, K3L, K3M, K3N,      K3Q, K3R, K3S, K4T,\
+    K2A, K2B, K2C, K2D, K2E, K2F, K2G, K2H, K2I, K2J, K2K, K2L, K2M, K2N,      K2Q, K2R, K2S, K2T,\
+    K1A, K1B, K1C, K1D, K1E, K1F, K1G, K1H, K1I, K1J, K1K, K1L, K1M,      K1O, K1Q, K1R, K1S, K0T,\
+    K0A, K0B, K0C,                K0G,                     K0J, K0M, K0N, K0O, K0P, K0R, K0S, K1T \
+) { \
+  { K5A, K5B, K5C, K5D, K5E, K5F, K5G, K5H, K5I, K5J, K5K, K5L, K5M, K5N, K5O, K5P, KC_NO,    KC_NO,    KC_NO,    KC_NO    }, \
+  { K4A, K4B, K4C, K4D, K4E, K4F, K4G, K4H, K4I, K4J, K4K, K4L, K4M, K4N, K4O, K4P, K4Q, K4R, K4S, K4T }, \
+  { K3A, K3B, K3C, K3D, K3E, K3F, K3G, K3H, K3I, K3J, K3K, K3L, K3M, K3N, K3O, K3P, K3Q, K3R, K3S, KC_NO    }, \
+  { K2A, K2B, K2C, K2D, K2E, K2F, K2G, K2H, K2I, K2J, K2K, K2L, K2M, K2N, K2O, K2P, K2Q, K2R, K2S, K2T }, \
+  { K1A, K1B, K1C, K1D, K1E, K1F, K1G, K1H, K1I, K1J, K1K, K1L, K1M, KC_NO,    K1O, K1P, K1Q, K1R, K1S, K1T }, \
+  { K0A, K0B, K0C, KC_NO,    KC_NO,    KC_NO,    K0G, KC_NO,    KC_NO,    K0J, KC_NO,    KC_NO,    K0M, K0N, K0O, K0P, KC_NO,    K0R, K0S, K0T }  \
+}
+
 //Layer renaming
 #define _DL  0  //default
 #define _LED 1  //LED config layer
@@ -24,7 +41,7 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
 {
-	[_DL] = KEYMAP_MX1800 (
+	[_DL] = KEYMAP_MX1800_ISO (
 		KC_ESC,  KC_F1,   KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9,   KC_F10, KC_F11, KC_F12,                         KC_INS,  KC_HOME,KC_PGUP,KC_PSCR,
 																												                                                              					KC_DEL,  KC_END, KC_PGDN,KC_LGUI,
 		KC_GRV,  KC_1,    KC_2,  KC_3,  KC_4,  KC_5,  KC_6,  KC_7,  KC_8,  KC_9,    KC_0,   DE_SS,   DE_ACUT, KC_NO,  KC_BSPC,      KC_NLCK, KC_PSLS,KC_PAST,MONKEY,
@@ -33,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
 		PROG_LP, DE_LESS, DE_Y,  KC_X,  KC_C,  KC_V,  KC_B,  KC_N,  KC_M,  KC_COMM, KC_DOT, DE_MINS, PROG_RP, KC_UP,                KC_P1,   KC_P2,  KC_P3,  KC_PENT,
 		KC_LCTL, KC_LGUI, KC_LALT,               KC_SPC,                   KC_RALT, MO(_FN1),        KC_LEFT, KC_DOWN, KC_RGHT,              KC_P0,  KC_PDOT,KC_NO ),
 
-	[_LED] = KEYMAP_MX1800 (
+	[_LED] = KEYMAP_MX1800_ISO (
 		___,  ___,   ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___,                         BL_ON,   RGB_TOG, ___,     ___,
 																									                                                	   BL_OFF,  RGB_HUI, RGB_SAI, RGB_VAI,
 		___,  ___,   ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___, ___,  ___,              ___,     RGB_HUD, RGB_SAD, RGB_VAD,
@@ -42,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
 		___,  ___,   ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___, ___,                    ___,   ___,   ___,   ___,
 		___,  ___,   ___,               ___,                   ___, ___,           ___, ___, ___,                 ___,   ___,   ___ ),
 
-	[_FN1] = KEYMAP_MX1800 (
+	[_FN1] = KEYMAP_MX1800_ISO (
 		___,  ___,   ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___,                             ___,   ___,   ___,   ___,
 																										                                                       ___,   ___,   ___,   ___,
 		___,  ___,   ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___, ___,  ___,                  ___,   ___,   ___,   ___,

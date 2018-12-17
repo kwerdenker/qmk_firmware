@@ -50,8 +50,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
 	[_FN] = KEYMAP_COMPACT_ISO_7U (
     ___,  ___,   ___, ___, ___, ___, ___, ___, ___, ___,   ___, ___,  ___,  ___,               ___, ___,___,___,
 		___,  ___,    ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___,    ___,   ___,   ___,  ___,             ___,  ___,___,___,
-		___,  ___,    ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___,    ___,   ___,   ___,                    ___,   ___,  ___,  ___,
-		___, ___,    ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___,    ___,  ___,   ___, RESET,                ___,   ___,  ___,  ___,
+		___,  ___,    KC_UP,  ___,  ___,  ___,  ___,  ___,  ___,  ___,    ___,   ___,   ___,                    ___,   ___,  ___,  ___,
+		___, KC_LEFT,    KC_DOWN,  KC_RGHT,  ___,  ___,  ___,  ___,  ___,  ___,    ___,  ___,   ___, RESET,                ___,   ___,  ___,  ___,
 		PROG_LC, ___, ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, PROG_RC, ___,                ___,   ___,  ___,  ___,
 		___, ___,                         KC_LGUI,                  ___, ___,        ___, ___, ___,               ___,  ___,___ ),
 };
@@ -146,8 +146,8 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 void led_set_user(uint8_t usb_led)
 {
     tinycmd_three_lock(usb_led & (1<<USB_LED_NUM_LOCK),
-                       usb_led & (1<<USB_LED_CAPS_LOCK),
-		                   (layer_state_is(_FN) ? 1 : 0),
+                       (layer_state_is(_FN) ? 1 : 0),
+                       usb_led & (1<<USB_LED_NUM_LOCK),
                        false);
     _delay_ms(10);
 }
