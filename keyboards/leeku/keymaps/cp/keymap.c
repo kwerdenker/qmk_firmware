@@ -31,7 +31,7 @@
 //Layer renaming
 #define _DL 0  //default
 #define _FN 1  //Capslock function layer
-#define _AR 2  //Arrow layer
+#define _ML 2  //Arrow layer
 
 //Keymapping renaming
 #define ___     KC_TRNS            	//renaming KC_TRNS for readability in keymaps
@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
 		KC_TAB,  KC_Q,    KC_W,  KC_E,  KC_R,  KC_T,  DE_Z,  KC_U,  KC_I,  KC_O,    KC_P,   DE_UE,   DE_PLUS,                KC_P7,   KC_P8,  KC_P9,  KC_PMNS,
 		SPECIAL, KC_A,    KC_S,  KC_D,  KC_F,  KC_G,  KC_H,  KC_J,  KC_K,  KC_L,    DE_OE,  DE_AE,   DE_HASH, KC_ENT,        KC_P4,   KC_P5,  KC_P6,  KC_PPLS,
 		KC_LSFT, DE_LESS, DE_Y,  KC_X,  KC_C,  KC_V,  KC_B,  KC_N,  KC_M,  KC_COMM, KC_DOT, DE_MINS, KC_RSFT, KC_UP,         KC_P1,   KC_P2,  KC_P3,  KC_PENT,
-		KC_LCTL, KC_LALT,                         KC_SPC,                  KC_RALT, MO(_AR),        KC_LEFT, KC_DOWN, KC_RGHT,        KC_P0,  KC_PDOT,KC_NO ),
+		KC_LCTL, KC_LALT,                         KC_SPC,                  KC_RALT, MO(_ML),        KC_LEFT, KC_DOWN, KC_RGHT,        KC_P0,  KC_PDOT,KC_NO ),
 
 	[_FN] = KEYMAP_COMPACT_ISO_7U (
     ___,  ___,    ___,     ___,     ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___,               ___, ___,___,___,
@@ -57,15 +57,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
 		___,  ___,    KC_UP,   ___,     ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___,                    ___,   ___,  ___,  ___,
 		___, KC_LEFT, KC_DOWN, KC_RGHT, ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___,                ___,   ___,  ___,  ___,
 		___, ___,     ___,     ___,     ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___,                ___,   ___,  ___,  ___,
-		___, ___,                         KC_LGUI,                     ___, ___,      ___, ___, ___,               ___,  ___,___ ),
+		___, ___,                         KC_LGUI,                     ___, ___,      WIN_LFT, ___, WIN_RGT,               ___,  ___,___ ),
 
-	[_AR] = KEYMAP_COMPACT_ISO_7U (
+	[_ML] = KEYMAP_COMPACT_ISO_7U (
     ___, ___, ___, ___, ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___,       ___, ___, ___, ___,
 		___, ___, ___, ___, ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___,       ___, ___, ___, ___,
 		___, ___, ___, ___, ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___,            ___, ___, ___, ___,
 		___, ___, ___, ___, ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___,       ___, ___, ___, ___,
-		___, ___, ___, ___, ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___,       ___, ___, ___, ___,
-		___, ___,                 ___,                     ___, ___,      WIN_LFT, ___, WIN_RGT,       ___, ___, ___ ),
+		___, ___, ___, ___, ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, KC_MSEL,       ___, ___, ___, ___,
+		___, ___,                 ___,                     ___, ___,  KC_MPRV, KC_MPLY, KC_MNXT,       ___, ___, ___ ),
 };
 
 // Custom triggering of the status LEDs via co-controller API
