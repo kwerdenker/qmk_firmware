@@ -30,6 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef DEBOUNCING_DELAY
 #   define DEBOUNCING_DELAY 5
 #endif
+
 static uint8_t debouncing = DEBOUNCING_DELAY;
 
 /* matrix state(1:on, 0:off) */

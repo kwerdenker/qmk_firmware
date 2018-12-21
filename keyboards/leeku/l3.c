@@ -26,7 +26,7 @@ extern rgblight_config_t rgblight_config;
 
 void rgblight_set(void)
 {
-    if (0)
+    if (rgblight_config.enable)
     {
         tinycmd_rgb_all(1, led[0].r, led[0].g, led[0].b, true);
         _delay_ms(10);
@@ -38,6 +38,7 @@ void rgblight_set(void)
         led[i].b = 0;
       }
       tinycmd_rgb_all(0, 0, 0, 0, true);
+      _delay_ms(10);
     }
 }
 

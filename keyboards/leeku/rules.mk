@@ -50,10 +50,5 @@ BACKLIGHT_ENABLE = yes
 RGBLIGHT_ENABLE = yes
 RGBLIGHT_CUSTOM_DRIVER = yes
 
-#OPT_DEFS += -DDEBUG_LEVEL=4
-
 # custom matrix setup
 CUSTOM_MATRIX = yes
-
-# programming options
-#PROGRAM_CMD = avrdude -c avrisp -P /dev/ttyUSB0 -p $(MCU) -e -U flash:w:$(TARGET).hex:i
