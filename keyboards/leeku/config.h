@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* matrix */
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 20
-//The folowing defines are unnecessary due to the custom matrix.c but I'll leave them in for documentation
+//The following defines are unnecessary due to the custom matrix.c but I'll leave them in for documentation
 /*#define DIODE_DIRECTION COL2ROW
 #define MATRIX_ROW_PINS {C2, C3, C4, C5, C6, C7}
 #define MATRIX_COL_PINS {A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, B2, B3, B4, B5, B6, B7, D4, D5, D6, D7}
