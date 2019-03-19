@@ -38,18 +38,18 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	switch (id) {
 		case 0:
 			if (record->event.pressed) {
-        g_config.color_1.h = 24;
-        g_config.color_1.s = 255;
+        g_config.color_1.h = 119;
+        g_config.color_1.s = 100;
         g_config.effect = 1;
-        g_config.brightness = 255;
-        g_config.layer_1_indicator.color.h = 188;
-        g_config.layer_1_indicator.color.s = 255;
+        g_config.brightness = 128;
+        g_config.layer_1_indicator.color.h = 247;
+        g_config.layer_1_indicator.color.s = 100;
         g_config.layer_1_indicator.index = 0;
-        g_config.layer_2_indicator.color.h = 188;
-        g_config.layer_2_indicator.color.s = 255;
+        g_config.layer_2_indicator.color.h = 247;
+        g_config.layer_2_indicator.color.s = 100;
         g_config.layer_2_indicator.index = 3;
-        g_config.layer_3_indicator.color.h = 188;
-        g_config.layer_3_indicator.color.s = 255;
+        g_config.layer_3_indicator.color.h = 247;
+        g_config.layer_3_indicator.color.s = 100;
         g_config.layer_3_indicator.index = 5;
         backlight_config_save();
 			}
@@ -57,4 +57,3 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	}
 	return MACRO_NONE;
 }
-
