@@ -80,11 +80,12 @@ void led_set_user(uint8_t usb_led) {
 }
 
 uint32_t layer_state_set_user(uint32_t state) {
+  rgblight_config_t eeprom;
   switch (biton32(state)) {
   case _FN:
     rgblight_enable_noeeprom();
     rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
-    rgblight_setrgb(0x83, 0x5A, 0xED);
+    rgblight_setrgb(0xF4, 0x86, 0x42);
     break;
   case _LE:
     rgblight_enable_noeeprom();
@@ -92,7 +93,9 @@ uint32_t layer_state_set_user(uint32_t state) {
     rgblight_setrgb(0xFF, 0xF2, 0x00);
     break;
   default: //  for any other layers, or the default layer
-    rgblight_disable_noeeprom();
+    eeprom.raw = eeconfig_read_rgblight();
+    rgblight_mode_noeeprom(eeprom.mode);
+    //rgblight_disable_noeeprom();
     break;
   }
   return state;
