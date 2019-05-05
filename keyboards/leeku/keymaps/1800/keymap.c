@@ -1,6 +1,8 @@
+
+#include "keymap_german.h"
 #include "../../l3.h"
 #include "../../led_l3.h"
-#include "keymap_extras/keymap_german.h"
+
 #include "../../tinycmd/tinycmdapi.h"
 
 #define TAPPING_TERM 100 //time in microseconds a key is counted as tapped
@@ -43,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
 {
 	[_DL] = KEYMAP_MX1800_ISO (
 		KC_ESC,  KC_F1,   KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9,   KC_F10, KC_F11, KC_F12,                         KC_INS,  KC_HOME,KC_PGUP,KC_PSCR,
-																												                                                              					KC_DEL,  KC_END, KC_PGDN,KC_LGUI,
+		                                                                                                                            KC_DEL,  KC_END, KC_PGDN,KC_LGUI,
 		KC_GRV,  KC_1,    KC_2,  KC_3,  KC_4,  KC_5,  KC_6,  KC_7,  KC_8,  KC_9,    KC_0,   DE_SS,   DE_ACUT, KC_NO,  KC_BSPC,      KC_NLCK, KC_PSLS,KC_PAST,MONKEY,
 		KC_TAB,  KC_Q,    KC_W,  KC_E,  KC_R,  KC_T,  DE_Z,  KC_U,  KC_I,  KC_O,    KC_P,   DE_UE,   DE_PLUS, KC_ENT,               KC_P7,   KC_P8,  KC_P9,  KC_PMNS,
 		MO(_FN1),KC_A,    KC_S,  KC_D,  KC_F,  KC_G,  KC_H,  KC_J,  KC_K,  KC_L,    DE_OE,  DE_AE,   DE_HASH, KC_ENT,               KC_P4,   KC_P5,  KC_P6,  KC_PPLS,
@@ -52,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
 
 	[_LED] = KEYMAP_MX1800_ISO (
 		___,  ___,   ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___,                         BL_ON,   RGB_TOG, ___,     ___,
-																									                                                	   BL_OFF,  RGB_HUI, RGB_SAI, RGB_VAI,
+																									       BL_OFF,  RGB_HUI, RGB_SAI, RGB_VAI,
 		___,  ___,   ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___, ___,  ___,              ___,     RGB_HUD, RGB_SAD, RGB_VAD,
 		___,  ___,   ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___, ___,                    ___,   ___,   ___,   ___,
 		___,  ___,   ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___, ___,                    ___,   ___,   ___,   ___,
@@ -61,10 +63,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
 
 	[_FN1] = KEYMAP_MX1800_ISO (
 		___,  ___,   ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___,                             ___,   ___,   ___,   ___,
-																										                                                       ___,   ___,   ___,   ___,
+		                                                                                                       ___,   ___,   ___,   ___,
 		___,  ___,   ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___, ___,  ___,                  ___,   ___,   ___,   ___,
-		___,  KC_PGUP,   KC_UP,  KC_PGDN,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___, ___,          ___,   ___,   ___,   ___,
-		___,  KC_LEFT,   KC_DOWN,  KC_RGHT,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___, ___,        ___,   ___,   ___,   ___,
+		___,  KC_PGUP,   KC_UP,  KC_PGDN,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___, ___,              ___,   ___,   ___,   ___,
+		___,  KC_LEFT,   KC_DOWN,  KC_RGHT,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, ___, ___,            ___,   ___,   ___,   ___,
 		PROG_LC,  ___,   ___,  ___,  ___,  ___,  ___,  ___,  ___,  ___, ___, ___, PROG_RC, ___,                ___,   ___,   ___,   ___,
 		___,  ___,   ___,               ___,                   TG(_LED), ___,           ___, ___, ___,                ___,   ___,   ___ ),
 };
@@ -123,10 +125,10 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 				if (timer_elapsed (timer) < TAPPING_TERM)
 				{
 					unregister_code (KC_LSFT);
-					register_code (DE_ALGR);
+					register_code (KC_ALGR);
 					register_code (KC_7);
 					unregister_code (KC_7);
-					unregister_code (DE_ALGR);
+					unregister_code (KC_ALGR);
 				}
 				unregister_code (KC_LSFT);
 			}
@@ -142,10 +144,10 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 				if (timer_elapsed (timer) < TAPPING_TERM)
 				{
 					unregister_code (KC_RSFT);
-					register_code (DE_ALGR);
+					register_code (KC_ALGR);
 					register_code (KC_0);
 					unregister_code (KC_0);
-					unregister_code (DE_ALGR);
+					unregister_code (KC_ALGR);
 				}
 				unregister_code (KC_RSFT);
 			}
