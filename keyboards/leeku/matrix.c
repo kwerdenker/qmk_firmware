@@ -80,6 +80,7 @@ void matrix_init(void)
   _delay_ms(10);
   tinycmd_rgb_effect_on(1, true);
   _delay_ms(10);
+  tinycmd_rgb_all(0, 0, 0, 0, true);
 }
 
 uint8_t matrix_scan(void)
