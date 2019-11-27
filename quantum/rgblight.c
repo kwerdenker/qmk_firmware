@@ -189,7 +189,6 @@ void rgblight_init(void) {
         return;
     }
 
-    debug_enable = 1;  // Debug ON!
     dprintf("rgblight_init called.\n");
     dprintf("rgblight_init start!\n");
     if (!eeconfig_is_enabled()) {
@@ -920,7 +919,7 @@ void rgblight_effect_snake(animation_status_t *anim) {
         ledp->g        = 0;
         ledp->b        = 0;
 #    ifdef RGBW
-        ledp->w        = 0;
+        ledp->w = 0;
 #    endif
         for (j = 0; j < RGBLIGHT_EFFECT_SNAKE_LENGTH; j++) {
             k = pos + j * increment;
