@@ -106,6 +106,12 @@ void rgblight_set_clipping_range(uint8_t start_pos, uint8_t num_leds) {
     clipping_num_leds  = num_leds;
 }
 
+
+static inline uint8_t min(uint8_t num1, uint8_t num2)
+{
+    return (num1 > num2) ? num2 : num1;
+}
+
 void rgblight_set_effect_range(uint8_t start_pos, uint8_t num_leds) {
     if (start_pos >= RGBLED_NUM) return;
     if (start_pos + num_leds > RGBLED_NUM) return;
@@ -113,6 +119,17 @@ void rgblight_set_effect_range(uint8_t start_pos, uint8_t num_leds) {
     effect_end_pos   = start_pos + num_leds;
     effect_num_leds  = num_leds;
 }
+
+#if defined RGBW && !defined RBGW_NO_AUTOMATIC_W
+static inline void convert_rgb_to_rgbw(uint8_t* r, uint8_t* g, uint8_t* b, uint8_t* w) {
+    // Determine lowest common value in all three colors, put that into
+    // the white channel and then lower all colors by that amount
+    *w = min(*r, min(*g, *b));
+    *r -= *w;
+    *g -= *w;
+    *b -= *w;
+}
+#endif
 
 void sethsv_raw(uint8_t hue, uint8_t sat, uint8_t val, LED_TYPE *led1) {
     HSV hsv = {hue, sat, val};
@@ -123,12 +140,16 @@ void sethsv_raw(uint8_t hue, uint8_t sat, uint8_t val, LED_TYPE *led1) {
 void sethsv(uint8_t hue, uint8_t sat, uint8_t val, LED_TYPE *led1) { sethsv_raw(hue, sat, val > RGBLIGHT_LIMIT_VAL ? RGBLIGHT_LIMIT_VAL : val, led1); }
 
 void setrgb(uint8_t r, uint8_t g, uint8_t b, LED_TYPE *led1) {
-    (*led1).r = r;
-    (*led1).g = g;
-    (*led1).b = b;
 #ifdef RGBW
-    (*led1).w = 0;
+    uint8_t w = 0;
+#ifndef RBGW_NO_AUTOMATIC_W
+    convert_rgb_to_rgbw(&r, &g, &b, &w);
 #endif
+    led1->w = w;
+#endif
+    led1->r = r;
+    led1->g = g;
+    led1->b = b;
 }
 
 void rgblight_check_config(void) {
@@ -511,13 +532,19 @@ void rgblight_setrgb(uint8_t r, uint8_t g, uint8_t b) {
     if (!rgblight_config.enable) {
         return;
     }
+#ifdef RGBW
+    uint8_t w = 0;
+#ifndef RBGW_NO_AUTOMATIC_W
+    convert_rgb_to_rgbw(&r, &g, &b, &w);
+#endif
+#endif
 
     for (uint8_t i = effect_start_pos; i < effect_end_pos; i++) {
         led[i].r = r;
         led[i].g = g;
         led[i].b = b;
 #ifdef RGBW
-        led[i].w = 0;
+        led[i].w = w;
 #endif
     }
     rgblight_set();
@@ -528,11 +555,18 @@ void rgblight_setrgb_at(uint8_t r, uint8_t g, uint8_t b, uint8_t index) {
         return;
     }
 
+#ifdef RGBW
+    uint8_t w = 0;
+#ifndef RBGW_NO_AUTOMATIC_W
+    convert_rgb_to_rgbw(&r, &g, &b, &w);
+#endif
+#endif
+
     led[index].r = r;
     led[index].g = g;
     led[index].b = b;
 #ifdef RGBW
-    led[index].w = 0;
+    led[index].w = w;
 #endif
     rgblight_set();
 }
@@ -564,12 +598,19 @@ void rgblight_setrgb_range(uint8_t r, uint8_t g, uint8_t b, uint8_t start, uint8
         return;
     }
 
+#ifdef RGBW
+    uint8_t w = 0;
+#ifndef RBGW_NO_AUTOMATIC_W
+    convert_rgb_to_rgbw(&r, &g, &b, &w);
+#endif
+#endif
+
     for (uint8_t i = start; i < end; i++) {
         led[i].r = r;
         led[i].g = g;
         led[i].b = b;
 #ifdef RGBW
-        led[i].w = 0;
+        led[i].w = w;
 #endif
     }
     rgblight_set();
