@@ -1,7 +1,7 @@
 #include "ws2812.h"
 #include "i2c_master.h"
 
-#ifdef RGBW
+#if defined(RGBW) && (PRODUCT != SINGA)
 #    error "RGBW not supported"
 #endif
 
