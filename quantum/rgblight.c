@@ -106,12 +106,6 @@ void rgblight_set_clipping_range(uint8_t start_pos, uint8_t num_leds) {
     clipping_num_leds  = num_leds;
 }
 
-
-static inline uint8_t min(uint8_t num1, uint8_t num2)
-{
-    return (num1 > num2) ? num2 : num1;
-}
-
 void rgblight_set_effect_range(uint8_t start_pos, uint8_t num_leds) {
     if (start_pos >= RGBLED_NUM) return;
     if (start_pos + num_leds > RGBLED_NUM) return;
@@ -121,7 +115,13 @@ void rgblight_set_effect_range(uint8_t start_pos, uint8_t num_leds) {
 }
 
 #if defined RGBW && !defined RBGW_NO_AUTOMATIC_W
-static inline void convert_rgb_to_rgbw(uint8_t* r, uint8_t* g, uint8_t* b, uint8_t* w) {
+
+uint8_t min(uint8_t num1, uint8_t num2)
+{
+    return (num1 > num2) ? num2 : num1;
+}
+
+void convert_rgb_to_rgbw(uint8_t* r, uint8_t* g, uint8_t* b, uint8_t* w) {
     // Determine lowest common value in all three colors, put that into
     // the white channel and then lower all colors by that amount
     *w = min(*r, min(*g, *b));
@@ -442,7 +442,11 @@ void rgblight_sethsv_noeeprom_old(uint8_t hue, uint8_t sat, uint8_t val) {
     if (rgblight_config.enable) {
         LED_TYPE tmp_led;
         sethsv(hue, sat, val, &tmp_led);
+#ifndef RGBW
         rgblight_setrgb(tmp_led.r, tmp_led.g, tmp_led.b);
+#else
+        rgblight_setrgbw(tmp_led.r, tmp_led.g, tmp_led.b, tmp_led.w);
+#endif
     }
 }
 
@@ -453,7 +457,11 @@ void rgblight_sethsv_eeprom_helper(uint8_t hue, uint8_t sat, uint8_t val, bool w
             // same static color
             LED_TYPE tmp_led;
             sethsv(hue, sat, val, &tmp_led);
+#ifndef RGBW
             rgblight_setrgb(tmp_led.r, tmp_led.g, tmp_led.b);
+#else
+            rgblight_setrgbw(tmp_led.r, tmp_led.g, tmp_led.b, tmp_led.w);
+#endif
         } else {
             // all LEDs in same color
             if (1 == 0) {  // dummy
@@ -532,6 +540,7 @@ void rgblight_setrgb(uint8_t r, uint8_t g, uint8_t b) {
     if (!rgblight_config.enable) {
         return;
     }
+
 #ifdef RGBW
     uint8_t w = 0;
 #ifndef RBGW_NO_AUTOMATIC_W
@@ -571,6 +580,48 @@ void rgblight_setrgb_at(uint8_t r, uint8_t g, uint8_t b, uint8_t index) {
     rgblight_set();
 }
 
+#ifdef RGBW
+void rgblight_setrgbw(uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
+    if (!rgblight_config.enable) {
+        return;
+    }
+
+    for (uint8_t i = effect_start_pos; i < effect_end_pos; i++) {
+        led[i].r = r;
+        led[i].g = g;
+        led[i].b = b;
+        led[i].w = w;
+    }
+    rgblight_set();
+}
+
+void rgblight_setrgbw_at(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t index) {
+    if (!rgblight_config.enable || index >= RGBLED_NUM) {
+        return;
+    }
+
+    led[index].r = r;
+    led[index].g = g;
+    led[index].b = b;
+    led[index].w = w;
+    rgblight_set();
+}
+
+void rgblight_setrgbw_range(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t start, uint8_t end) {
+    if (!rgblight_config.enable || start < 0 || start >= end || end > RGBLED_NUM) {
+        return;
+    }
+    for (uint8_t i = start; i < end; i++) {
+        led[i].r = r;
+        led[i].g = g;
+        led[i].b = b;
+        led[i].w = w;
+    }
+    rgblight_set();
+    wait_ms(1);
+}
+#endif
+
 void rgblight_sethsv_at(uint8_t hue, uint8_t sat, uint8_t val, uint8_t index) {
     if (!rgblight_config.enable) {
         return;
@@ -578,7 +629,11 @@ void rgblight_sethsv_at(uint8_t hue, uint8_t sat, uint8_t val, uint8_t index) {
 
     LED_TYPE tmp_led;
     sethsv(hue, sat, val, &tmp_led);
+#ifndef RGBW
     rgblight_setrgb_at(tmp_led.r, tmp_led.g, tmp_led.b, index);
+#else
+    rgblight_setrgbw_at(tmp_led.r, tmp_led.g, tmp_led.b, tmp_led.w, index);
+#endif
 }
 
 #if defined(RGBLIGHT_EFFECT_BREATHING) || defined(RGBLIGHT_EFFECT_RAINBOW_MOOD) || defined(RGBLIGHT_EFFECT_RAINBOW_SWIRL) || defined(RGBLIGHT_EFFECT_SNAKE) || defined(RGBLIGHT_EFFECT_KNIGHT)
@@ -624,7 +679,11 @@ void rgblight_sethsv_range(uint8_t hue, uint8_t sat, uint8_t val, uint8_t start,
 
     LED_TYPE tmp_led;
     sethsv(hue, sat, val, &tmp_led);
+#ifndef RGBW
     rgblight_setrgb_range(tmp_led.r, tmp_led.g, tmp_led.b, start, end);
+#else
+    rgblight_setrgbw_range(tmp_led.r, tmp_led.g, tmp_led.b, tmp_led.w, start, end);
+#endif
 }
 
 #ifndef RGBLIGHT_SPLIT

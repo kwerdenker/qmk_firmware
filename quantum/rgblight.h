@@ -190,6 +190,12 @@ void rgblight_setrgb_range(uint8_t r, uint8_t g, uint8_t b, uint8_t start, uint8
 void rgblight_sethsv_range(uint8_t hue, uint8_t sat, uint8_t val, uint8_t start, uint8_t end);
 void rgblight_setrgb(uint8_t r, uint8_t g, uint8_t b);
 
+#ifdef RGBW
+void rgblight_setrgbw(uint8_t r, uint8_t g, uint8_t b, uint8_t w);
+void rgblight_setrgbw_at(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t index);
+void rgblight_setrgbw_range(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint8_t start, uint8_t end);
+#endif
+
 #    ifndef RGBLIGHT_SPLIT
 void rgblight_setrgb_master(uint8_t r, uint8_t g, uint8_t b);
 void rgblight_setrgb_slave(uint8_t r, uint8_t g, uint8_t b);
