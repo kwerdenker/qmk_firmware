@@ -1,5 +1,5 @@
 #undef RGBLED_NUM
-#define RGBLED_NUM 5
+#define RGBLED_NUM 13
 
 #define RGB_DI_PIN F4
 #ifdef RGB_DI_PIN
