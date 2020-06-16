@@ -46,10 +46,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_MEDIA] = LAYOUT(
-	KC_MUTE,    KC_VOLD, KC_VOLU,
-	KC_MPRV,    KC_MPLY, KC_MNXT,
-	HYPER,      KC_MSEL, VSCODE,
-	TO(_NUMPAD),  KC_NO, TO(_RGB)),
+	TO(_NUMPAD), KC_MSEL, TO(_RGB),
+	KC_MPRV,     KC_MPLY, KC_MNXT,
+	HYPER,       KC_UP,   VSCODE,
+	KC_LEFT,     KC_DOWN, KC_RIGHT),
 
   [_NUMPAD] = LAYOUT(
 	KC_7,       KC_8, KC_9,

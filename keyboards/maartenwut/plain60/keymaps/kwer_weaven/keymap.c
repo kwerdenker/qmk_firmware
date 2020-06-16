@@ -31,14 +31,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_DL] = LAYOUT(
-      KC_ESC,  KC_1,    KC_2,    KC_3,   KC_4,      KC_5,    KC_6,    KC_7,   KC_8,    KC_9, KC_0,   DE_SS,   DE_ACUT, ______, KC_BSPC,   \
-      KC_TAB,  KC_Q,    KC_W,    KC_E,   KC_R,      KC_T,    DE_Z,    KC_U,   KC_I,    KC_O, KC_P,   DE_UE,   DE_PLUS,          DE_HASH,   \
-      SPECIAL, KC_A,    KC_S,    KC_D,   KC_F,      KC_G,    KC_H,    KC_J,   KC_K,    KC_L, DE_OE,  DE_AE,   DE_HASH,          KC_ENT,   \
-      KC_LSFT, DE_LESS, DE_Y,    KC_X,   KC_C,      KC_V,    KC_B,    KC_N,   KC_M, KC_COMM, KC_DOT, DE_MINS,          KC_RSFT, MONKEY,   \
-      KC_LCTL, KC_LGUI, KC_LALT,                             KC_SPC                        , ______, KC_ALGR, TG(_FUN),         KC_RCTL   ),
+      KC_ESC,  KC_1,    KC_2,    KC_3,   KC_4,      KC_5,    KC_6,    KC_7,   KC_8,    KC_9, KC_0,   DE_SS,   DE_ACUT, ______,       KC_BSPC,  \
+      KC_TAB,  KC_Q,    KC_W,    KC_E,   KC_R,      KC_T,    DE_Z,    KC_U,   KC_I,    KC_O, KC_P,   DE_UE,   DE_PLUS,               DE_HASH,  \
+      SPECIAL, KC_A,    KC_S,    KC_D,   KC_F,      KC_G,    KC_H,    KC_J,   KC_K,    KC_L, DE_OE,  DE_AE,   DE_HASH,               KC_ENT,   \
+      KC_LSFT, DE_LESS, DE_Y,    KC_X,   KC_C,      KC_V,    KC_B,    KC_N,   KC_M, KC_COMM, KC_DOT, DE_MINS, MT(MOD_RSFT, KC_UP),   KC_PSCR,  \
+      KC_LCTL, KC_LGUI, KC_LALT,                             KC_SPC                        , ______, MT(MOD_RALT, KC_LEFT), KC_DOWN, KC_RIGHT),
 
   [_FUN] = LAYOUT(
-      ______, KC_F1,   KC_F2,   KC_F3,    KC_F4,   KC_F5,   KC_F6,  KC_F7,  KC_F8,  KC_F9, KC_F10, KC_F11,  KC_F12, ______, KC_DEL,   \
+      RESET,  KC_F1,   KC_F2,   KC_F3,    KC_F4,   KC_F5,   KC_F6,  KC_F7,  KC_F8,  KC_F9, KC_F10, KC_F11,  KC_F12, ______, KC_DEL,   \
       ______, KC_PGUP, KC_UP,   KC_PGDN,  ______,  ______, ______, ______, ______, ______, ______, ______,  ______,         ______,   \
       ______, KC_LEFT, KC_DOWN, KC_RIGHT, KC_HOME, ______, ______, KC_END, ______, ______, ______, ______,  ______,         ______,   \
       ______, ______, ______,   ______,   ______,  ______, ______, ______, ______, ______, ______, ______,           KC_UP, ______,   \
